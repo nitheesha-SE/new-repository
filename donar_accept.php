@@ -1,4 +1,9 @@
-
+<? php
+session_start();
+if(!session_is_registered("username"){
+	header("location:index.php");
+}
+?>s
 <!DOCTYPE html>
 <html>
 <head>
