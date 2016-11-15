@@ -3,7 +3,21 @@ session_start();
 if(!session_is_registered("username"){
 	header("location:index.php");
 }
+if(isset($_POST["submit"])){
+$servername = "localhost";
+$db_username = "root";
+$db_password = "";
+$dbname = "bloodbank";
+
+// Create connection
+$conn = new mysqli ( $servername, $db_username, $db_password, $dbname );
+// Check connection
+if ($conn->connect_error) {
+	die ( "Connection failed: " . $conn->connect_error );
+}
+$rname =$_POST["RequestorName"];
 ?>
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -17,7 +31,7 @@ if(!session_is_registered("username"){
 <div class="container">
 
  <div id="login-form">
-    <form method="post" action="donar_details.php" autocomplete="off">
+    <form method="post" action="donar_acceptor.php" autocomplete="off">
 	<div class="form-group">
              <h2 class="">enter the details of donar</h2>
             </div>
@@ -30,15 +44,15 @@ if(!session_is_registered("username"){
 		<div class="form-group">
 		<tr>
 		<td>Name:</td>
-		<td> <input type="text" name="name" class="form-control" placeholder="Enter Name" maxlength="50"  /></td>
+		<td> <input type="text" name="dname" class="form-control" placeholder="Enter Name" maxlength="50"  /></td>
 		</div>
 	
 		</tr>
 		
 		<div class="form-group">
 		<tr>
-		<td>Blood group</td>
-		<td> <select name="bloodgroup">
+		<td>dblood</td>
+		<td> <select name="dblood">
 			<option value="">select</option>
 			<option value="A-">A-</option>
 			<option value="B+">B+</option>
@@ -54,7 +68,7 @@ if(!session_is_registered("username"){
 		<div class="form-group">
 		<tr>
 		<td>phonenumber</td>
-		<td> <input type="text" name="phonenumber" class="form-control"  /></td>
+		<td> <input type="text" name="dphone" class="form-control"  /></td>
 		</tr>
 		</div>
 
@@ -62,7 +76,7 @@ if(!session_is_registered("username"){
 		<div class="form-group">
 		<tr>
 		<td>address</td>
-		<td> <input type="text" name="address" class="form-control"  /> </td>
+		<td> <input type="text" name="daddress" class="form-control"  /> </td>
 		</tr>
 		</div>
 
@@ -90,7 +104,9 @@ if(!session_is_registered("username"){
         </div>
 
 </body>
-
+ </html>
+ <?php $conn ->close();
+?>
 
 
               
